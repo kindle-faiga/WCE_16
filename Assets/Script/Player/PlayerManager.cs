@@ -6,7 +6,7 @@ namespace WCE_16
     public enum WEAPON_NAME
     {
         Bullet,
-        Missile,
+        Bomb,
         Special,
         End,
     };
