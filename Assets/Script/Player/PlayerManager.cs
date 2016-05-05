@@ -3,16 +3,21 @@ using System.Collections;
 
 namespace WCE_16
 {
+    public enum WEAPON_NAME
+    {
+        Bullet,
+        Missile,
+        Special,
+        End,
+    };
+
     public class PlayerManager : MonoBehaviour
     {
-
-        // Use this for initialization
         void Start()
         {
 
         }
 
-        // Update is called once per frame
         void Update()
         {
 
