@@ -6,6 +6,8 @@ namespace WCE_16
 {
     public class WeaponSelecter : MonoBehaviour
     {
+        public GameObject Bullet;
+        public GameObject Bomb;
         private int weaponBoxNum;
         private bool isSelect = false;
         private float moveTime = 0.5f;
@@ -88,7 +90,18 @@ namespace WCE_16
         //武器使用
         private void UseWeapon()
         {
-
+            switch(weaponName)
+            {
+                case WEAPON_NAME.Bullet:
+                    Instantiate(Bullet, transform.position, transform.rotation);
+                    break;
+                case WEAPON_NAME.Bomb:
+                    GameObject bomb = Instantiate(Bomb, new Vector3(transform.position.x, transform.position.y, transform.position.z + 10.0f), transform.rotation) as GameObject;
+                    Destroy(bomb, 3.0f);
+                    break;
+                case WEAPON_NAME.Special:
+                    break;
+            }
         }
 
         //武器変更
