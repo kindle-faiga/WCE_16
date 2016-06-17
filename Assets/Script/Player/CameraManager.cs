@@ -55,6 +55,7 @@ namespace WCE_16
             newPosition.z = player.transform.position.z + offset.z;
 
             transform.position = Vector3.Lerp(transform.position, newPosition, moveRange * Time.deltaTime);
+            //transform.LookAt(player.transform);
         }
     }
 }

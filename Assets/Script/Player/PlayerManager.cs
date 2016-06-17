@@ -17,6 +17,7 @@ namespace WCE_16
         private float speed = 0f;
         private float maxSpeed = 50.0f;
         private float speedRange = 0.5f;
+        private float rotateRange = 0.05f;
 
         void Start()
         {
@@ -48,7 +49,11 @@ namespace WCE_16
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
 
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, speed);
+            float angle = transform.localRotation.y;
+
+            GetComponent<Rigidbody>().velocity = new Vector3(speed * Mathf.Sin(angle), 0, speed * Mathf.Cos(angle));
+            transform.RotateAroundLocal(transform.up, h * rotateRange);
+            //transform.RotateAround(transform.up, h * rotateRange);
             //GetComponent<Rigidbody>().AddForce(h * speed, 0, speed * offset);
         }
     }
