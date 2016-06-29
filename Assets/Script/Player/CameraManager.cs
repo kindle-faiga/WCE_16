@@ -53,9 +53,11 @@ namespace WCE_16
             newPosition.x = player.transform.position.x + offset.x;
             newPosition.y = player.transform.position.y + offset.y;
             newPosition.z = player.transform.position.z + offset.z;
-
             transform.position = Vector3.Lerp(transform.position, newPosition, moveRange * Time.deltaTime);
-            //transform.LookAt(player.transform);
+
+            Quaternion newQuaternion = transform.rotation;
+            newQuaternion.y = player.transform.rotation.y;
+            transform.rotation = Quaternion.Lerp(transform.rotation, newQuaternion, moveRange * Time.deltaTime);
         }
     }
 }
