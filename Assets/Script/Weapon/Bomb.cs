@@ -26,9 +26,12 @@ namespace WCE_16
             StartCoroutine(WaitForEffect());
         }
 
-        void Update()
+        void FixedUpdate()
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, speed);
+            //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, speed);
+            Vector3 t = transform.forward;
+            t.y = 0;
+            GetComponent<Rigidbody>().velocity = t * speed;
         }
 
         IEnumerator WaitForEffect()

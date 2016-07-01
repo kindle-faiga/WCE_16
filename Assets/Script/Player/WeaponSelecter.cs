@@ -93,15 +93,15 @@ namespace WCE_16
             switch(weaponName)
             {
                 case WEAPON_NAME.Bullet:
-                    GameObject bullet = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z + 10.0f), transform.rotation) as GameObject;
+                    GameObject bullet = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject;
                     Destroy(bullet, 2.0f);
                     break;
                 case WEAPON_NAME.Bomb:
-                    GameObject bomb = Instantiate(Bomb, new Vector3(transform.position.x, transform.position.y, transform.position.z + 10.0f), transform.rotation) as GameObject;
+                    GameObject bomb = Instantiate(Bomb, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject;
                     Destroy(bomb, 5.0f);
                     break;
                 case WEAPON_NAME.Special:
-                    
+
                     break;
             }
         }
