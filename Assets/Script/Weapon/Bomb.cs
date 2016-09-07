@@ -8,22 +8,21 @@ namespace WCE_16
         public GameObject BombEffect;
         private float speed = 100.0f;
 
-        /*
         void OnCollisionEnter(Collision c)
         {
-            if (c.transform.tag == "Tower")
+            if (c.transform.tag == "Block")
             {
-                Debug.Log("Hit");
-                GameObject effect = Instantiate(BombEffect, transform.position, transform.rotation) as GameObject;
-                Destroy(effect, 1.0f);
-                Destroy(gameObject);
+                if (!c.transform.GetComponent<BlockState>().IsCrash())
+                {
+                    c.transform.GetComponent<BlockState>().Hit(BombEffect);
+                    Destroy(gameObject);
+                }
             }
         }
-        */
 
         void Start()
         {
-            StartCoroutine(WaitForEffect());
+            //StartCoroutine(WaitForEffect());
         }
 
         void FixedUpdate()
@@ -33,7 +32,7 @@ namespace WCE_16
             t.y = 0;
             GetComponent<Rigidbody>().velocity = t * speed;
         }
-
+        /*
         IEnumerator WaitForEffect()
         {
             yield return new WaitForSeconds(3.0f);
@@ -41,5 +40,6 @@ namespace WCE_16
             Destroy(effect, 5.0f);
             Destroy(gameObject);
         }
+        */
     }
 }

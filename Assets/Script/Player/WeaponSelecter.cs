@@ -8,6 +8,7 @@ namespace WCE_16
     {
         public GameObject Bullet;
         public GameObject Bomb;
+        public Transform shotPos;
         private int weaponBoxNum;
         private bool isSelect = false;
         private float moveTime = 0.5f;
@@ -93,12 +94,12 @@ namespace WCE_16
             switch(weaponName)
             {
                 case WEAPON_NAME.Bullet:
-                    GameObject bullet = Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject;
+                    GameObject bullet = Instantiate(Bullet, shotPos.position, transform.rotation) as GameObject;
                     Destroy(bullet, 2.0f);
                     break;
                 case WEAPON_NAME.Bomb:
-                    GameObject bomb = Instantiate(Bomb, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject;
-                    Destroy(bomb, 5.0f);
+                    GameObject bomb = Instantiate(Bomb, shotPos.position, transform.rotation) as GameObject;
+                    Destroy(bomb, 2.0f);
                     break;
                 case WEAPON_NAME.Special:
 
