@@ -13,12 +13,12 @@ namespace WCE_16
 
     public class PlayerManager : MonoBehaviour
     {
-        public float speedRange = 5.0f;
+        public float maxSpeed = 200.0f;
+        public float speedRange = 10.0f;
         public float rotateRange = 20.0f;
         private Rigidbody rigitbody;
         private float offset = 5.0f;
         private float speed = 0f;
-        private float maxSpeed = 50.0f;
 
         void Start()
         {
@@ -28,7 +28,11 @@ namespace WCE_16
 
         void Update()
         {
-            if(Input.GetButton("Accel"))
+            if (Input.GetButton("Brake"))
+            {
+                speed = 0;
+            }
+            else if(Input.GetButton("Accel"))
             {
                 if (!Input.GetButtonDown("Brake"))
                 {
@@ -41,11 +45,6 @@ namespace WCE_16
             else if(0 < speed)
             {
                 speed -= speedRange;
-            }
-
-            if (Input.GetButtonDown("Brake"))
-            {
-                speed = 0;
             }
         }
 

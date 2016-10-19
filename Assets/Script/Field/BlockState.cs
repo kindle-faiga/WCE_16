@@ -11,11 +11,11 @@ public class BlockState : MonoBehaviour
     {
         blockManager = GetComponentInParent<BlockManager>();
     }
-    
+
     public bool IsCrash()
     {
         return isCrashed;
-    }	
+    }
 
     public void Hit(GameObject bombEffect)
     {
@@ -31,12 +31,14 @@ public class BlockState : MonoBehaviour
             isCrashed = true;
         }
 
+        GetComponent<Rigidbody>().isKinematic = false;
+
         StartCoroutine(WaitForCrash());
     }
 
     IEnumerator WaitForCrash()
     {
-        yield return new WaitForSeconds(0.5f);
-        iTween.ScaleTo(gameObject, transform.localScale/2, 0.5f);
+        yield return new WaitForSeconds(0f);
+        iTween.ScaleTo(gameObject, transform.localScale * 0.75f, 0.5f);
     }
 }
