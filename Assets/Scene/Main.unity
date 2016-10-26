@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3983775, g: 0.4165485, b: 0.41307086, a: 1}
+  m_IndirectSpecularColor: {r: 0.39863405, g: 0.41692117, b: 0.4136663, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -343,8 +343,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &155490576 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 113672, guid: 2d85add221abf0047a3507619077015e, type: 2}
@@ -2697,8 +2697,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &671436293
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,8 +4142,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &1101761430
 GameObject:
   m_ObjectHideFlags: 0
@@ -5601,8 +5601,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &1419638786
 GameObject:
   m_ObjectHideFlags: 0
@@ -5710,8 +5710,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &1456224663 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 194444, guid: 2d85add221abf0047a3507619077015e, type: 2}
@@ -5817,8 +5817,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &1555564278
 GameObject:
   m_ObjectHideFlags: 0
@@ -5926,8 +5926,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &1616542696 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 160712, guid: 2d85add221abf0047a3507619077015e, type: 2}
@@ -6363,8 +6363,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 600, y: 500, z: 50}
+  m_Center: {x: 0, y: 100, z: 0}
 --- !u!1 &1899951356
 GameObject:
   m_ObjectHideFlags: 0
@@ -6619,7 +6619,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6ee86fa0555114f18b2f4b6befcbac7e, type: 3}
       propertyPath: m_Name
-      value: mafura
+      value: body
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 6ee86fa0555114f18b2f4b6befcbac7e, type: 3}
       propertyPath: m_Layer

@@ -17,6 +17,9 @@ namespace WCE_16
         public float speedRange = 10.0f;
         public float rotateRange = 20.0f;
         private Rigidbody rigitbody;
+        private Transform cameraAngle;
+        private float cameraRange = 15.0f;
+        private float cameraRate = 1.0f;
         private float offset = 5.0f;
         private float speed = 0f;
 
@@ -24,6 +27,7 @@ namespace WCE_16
         {
             speed = 0f;
             rigitbody = GetComponent<Rigidbody>();
+            cameraAngle = gameObject.transform.FindChild("Main Camera").transform;
         }
 
         void Update()
@@ -59,6 +63,27 @@ namespace WCE_16
 
             Vector3 movement = transform.forward  * speed * speedRange * Time.deltaTime;
             rigitbody.MovePosition(rigitbody.position + movement);
+
+            float angle_c = cameraAngle.eulerAngles.z;
+
+            if(0 < h)
+            {
+                if(360 - (cameraRange + cameraRate) < angle_c || angle_c < cameraRange)
+                {
+                    cameraAngle.Rotate(new Vector3(0,0,1), cameraRate);
+                }
+            }
+            else if(h < 0)
+            { 
+                if(360 - cameraRange < angle_c || angle_c < cameraRange + cameraRate)
+                {
+                    cameraAngle.Rotate(new Vector3(0,0,1), -cameraRate);
+                }
+            }
+            else
+            {
+               //iTween.RotateTo(cameraAngle.gameObject, iTween.Hash("z", 0,"time", 2.0f));
+            }
         }
     }
 }
