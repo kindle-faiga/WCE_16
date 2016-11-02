@@ -33,7 +33,9 @@ public class BlockState : MonoBehaviour
 
         GetComponent<Rigidbody>().isKinematic = false;
 
-        StartCoroutine(WaitForCrash());
+        transform.tag = "Item";
+
+        //StartCoroutine(WaitForCrash());
     }
 
     IEnumerator WaitForCrash()

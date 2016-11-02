@@ -6,35 +6,56 @@ namespace WCE_16
 {
     public class WeaponSelecter : MonoBehaviour
     {
-        public GameObject Bullet;
-        public GameObject Bomb;
+        [SerializeField]
+        private GameObject Bullet;
         private Transform shotPos;
+        private float shotRange = 5.0f;
+        private float shotState;
+        private float maxShotState = 100.0f;
+        private float shotRate = 0.25f;
+        private float nextShot = 0.0f;
+
+        public float GetShotState()
+        {
+            return shotState;
+        }
+
+        public float GetMaxShotState()
+        {
+            return maxShotState;
+        }
 
         void Start()
         {
-            shotPos = GameObject.Find("Player/ShotPos").transform;
+            shotPos = transform.FindChild("ShotPos").transform;
+            shotState = maxShotState;
         }
 
         void Update()
         {
-            if(Input.GetButtonDown("UseBullet"))
+            if(Input.GetButton("UseBullet"))
             {
-                UseBullet();
+                if(nextShot < Time.time && shotRange < shotState)
+                {
+                    nextShot = Time.time + shotRate;
+
+                    shotState -= shotRange;
+
+                    UseBullet();
+                }
             }
-            else if(Input.GetButtonDown("UseBomb"))
+            else
             {
-                UseBomb();
+                if(shotState < maxShotState)
+                {
+                    ++shotState;
+                }
             }
         }
 
         private void UseBullet()
         {
             Instantiate(Bullet, shotPos.position, transform.rotation);
-        }
-
-        private void UseBomb()
-        {
-            Instantiate(Bomb, shotPos.position, transform.rotation);
         }
     }
 }

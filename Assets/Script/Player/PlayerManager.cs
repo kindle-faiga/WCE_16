@@ -3,21 +3,20 @@ using System.Collections;
 
 namespace WCE_16
 {
-    public enum WEAPON_NAME
-    {
-        Bullet,
-        Bomb,
-        Special,
-        End,
-    };
-
     public class PlayerManager : MonoBehaviour
     {
-        public float maxSpeed = 200.0f;
-        public float speedRange = 10.0f;
-        public float rotateRange = 20.0f;
+        [SerializeField]
+        private float maxSpeed = 200.0f;
+        [SerializeField]
+        private float speedRange = 10.0f;
+        [SerializeField]
+        private float rotateRange = 45.0f;
+        private float defaultRange;
+        private float turnRange;
         private Rigidbody rigitbody;
         private Transform cameraAngle;
+        private ParticleSystem smoke;
+        private ParticleSystem brake;
         private float cameraRange = 15.0f;
         private float cameraRate = 1.0f;
         private float offset = 5.0f;
@@ -26,8 +25,24 @@ namespace WCE_16
         void Start()
         {
             speed = 0f;
+            defaultRange = rotateRange;
+            turnRange = rotateRange * 2f;
             rigitbody = GetComponent<Rigidbody>();
             cameraAngle = gameObject.transform.FindChild("Main Camera").transform;
+            smoke = transform.FindChild("Smoke").GetComponent<ParticleSystem>();
+            brake = transform.FindChild("Brake").GetComponent<ParticleSystem>();
+            smoke.Stop();
+            brake.Stop();
+        }
+
+        public float GetSpeed()
+        {
+            return speed;
+        }
+
+        public float GetMaxSpeed()
+        {
+            return maxSpeed;
         }
 
         void Update()
@@ -35,9 +50,15 @@ namespace WCE_16
             if (Input.GetButton("Brake"))
             {
                 speed = 0;
+                rotateRange = turnRange;
             }
             else if(Input.GetButton("Accel"))
             {
+                if(!smoke.IsAlive())
+                {
+                    smoke.Play();
+                }
+
                 if (!Input.GetButtonDown("Brake"))
                 {
                     if (speed < maxSpeed)
@@ -50,6 +71,18 @@ namespace WCE_16
             {
                 speed -= speedRange;
             }
+
+            if(Input.GetButtonUp("Brake"))
+            {
+                rotateRange = defaultRange;
+                brake.Stop();
+            }
+                
+            else if(Input.GetButtonDown("Brake"))
+            {
+                smoke.Stop();
+                brake.Play();
+            }  
         }
 
         void FixedUpdate()

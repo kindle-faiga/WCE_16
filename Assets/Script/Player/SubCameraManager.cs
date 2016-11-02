@@ -9,7 +9,7 @@ namespace WCE_16
 
 		void Start()
 		{
-				player = GameObject.FindGameObjectWithTag("Player").transform;
+				player = GameObject.Find("Player1").transform;
 		}
 
 		void Update()
