@@ -12,6 +12,8 @@ public class BlockManager : MonoBehaviour
         {
             block.Crash();
         }
+
+        Destroy(gameObject);
     }
 
     List<GameObject> GetAll(GameObject obj)
@@ -47,6 +49,16 @@ public class BlockManager : MonoBehaviour
                 BlockState blockState = obj.GetComponent<BlockState>();
                 blocks.Add(blockState);
             }
+        }
+
+        if(transform.position.y < 0)
+        {
+            iTween.MoveTo(gameObject, 
+			iTween.Hash
+			(
+				"y", 0f, 
+				"time", 1.0f
+			));
         }
     }
 	

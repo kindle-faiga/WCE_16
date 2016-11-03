@@ -33,6 +33,8 @@ public class BlockState : MonoBehaviour
 
         GetComponent<Rigidbody>().isKinematic = false;
 
+        transform.parent = null;
+
         transform.tag = "Item";
 
         //StartCoroutine(WaitForCrash());
