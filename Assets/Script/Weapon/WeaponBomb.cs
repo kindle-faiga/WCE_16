@@ -5,6 +5,18 @@ public class WeaponBomb : MonoBehaviour
 {
 	[SerializeField]
 	private float rotateRange = 30.0f;
+	[SerializeField]
+    private GameObject destroyEffect;
+
+	void OnCollisionEnter(Collision collision)
+	{
+		if(collision.transform.tag != "Machine")
+		{
+			GameObject effect =  Instantiate(destroyEffect, transform.position, transform.rotation) as GameObject;
+			Destroy(effect, 0.5f);
+			Destroy(gameObject);
+		}
+	}
 
 	void Start () 
 	{
