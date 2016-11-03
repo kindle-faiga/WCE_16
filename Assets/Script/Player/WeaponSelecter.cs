@@ -8,6 +8,7 @@ namespace WCE_16
     {
         [SerializeField]
         private GameObject Bullet;
+        private PlayerManager playerManager;
         private Transform shotPos;
         private float shotRange = 5.0f;
         private float shotState;
@@ -29,26 +30,30 @@ namespace WCE_16
         {
             shotPos = transform.FindChild("ShotPos").transform;
             shotState = maxShotState;
+            playerManager = GetComponent<PlayerManager>();
         }
 
         void Update()
         {
-            if(Input.GetButton("UseBullet"))
+            if(playerManager.GetActive())
             {
-                if(nextShot < Time.time && shotRange < shotState)
+                if(Input.GetButton("UseBullet"))
                 {
-                    nextShot = Time.time + shotRate;
+                    if(nextShot < Time.time && shotRange < shotState)
+                    {
+                        nextShot = Time.time + shotRate;
 
-                    shotState -= shotRange;
+                        shotState -= shotRange;
 
-                    UseBullet();
+                        UseBullet();
+                    }
                 }
-            }
-            else
-            {
-                if(shotState < maxShotState)
+                else
                 {
-                    ++shotState;
+                    if(shotState < maxShotState)
+                    {
+                        ++shotState;
+                    }
                 }
             }
         }

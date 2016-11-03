@@ -21,6 +21,7 @@ namespace WCE_16
         private float cameraRate = 1.0f;
         private float offset = 5.0f;
         private float speed = 0f;
+        private bool isActive = false;
 
         void Start()
         {
@@ -28,11 +29,26 @@ namespace WCE_16
             defaultRange = rotateRange;
             turnRange = rotateRange * 2f;
             rigitbody = GetComponent<Rigidbody>();
-            cameraAngle = gameObject.transform.FindChild("Main Camera").transform;
+            cameraAngle = gameObject.transform.FindChild("Machine Camera").transform;
             smoke = transform.FindChild("Smoke").GetComponent<ParticleSystem>();
             brake = transform.FindChild("Brake").GetComponent<ParticleSystem>();
             smoke.Stop();
             brake.Stop();
+        }
+
+        public bool GetActive()
+        {
+            return isActive;
+        }
+
+        public void SetActive()
+        {
+            isActive = true;
+        }
+
+        public void ResetActive()
+        {
+            isActive = false;
         }
 
         public float GetSpeed()
@@ -47,75 +63,81 @@ namespace WCE_16
 
         void Update()
         {
-            if (Input.GetButton("Brake"))
+            if(isActive)
             {
-                speed = 0;
-                rotateRange = turnRange;
-            }
-            else if(Input.GetButton("Accel"))
-            {
-                if(!smoke.IsAlive())
+                if (Input.GetButton("Brake"))
                 {
-                    smoke.Play();
+                    speed = 0;
+                    rotateRange = turnRange;
                 }
-
-                if (!Input.GetButtonDown("Brake"))
+                else if(Input.GetButton("Accel"))
                 {
-                    if (speed < maxSpeed)
+                    if(!smoke.IsAlive())
                     {
-                        speed += speedRange;
+                        smoke.Play();
+                    }
+
+                    if (!Input.GetButtonDown("Brake"))
+                    {
+                        if (speed < maxSpeed)
+                        {
+                            speed += speedRange;
+                        }
                     }
                 }
-            }
-            else if(0 < speed)
-            {
-                speed -= speedRange;
-            }
+                else if(0 < speed)
+                {
+                    speed -= speedRange;
+                }
 
-            if(Input.GetButtonUp("Brake"))
-            {
-                rotateRange = defaultRange;
-                brake.Stop();
+                if(Input.GetButtonUp("Brake"))
+                {
+                    rotateRange = defaultRange;
+                    brake.Stop();
+                }
+                    
+                else if(Input.GetButtonDown("Brake"))
+                {
+                    smoke.Stop();
+                    brake.Play();
+                }  
             }
-                
-            else if(Input.GetButtonDown("Brake"))
-            {
-                smoke.Stop();
-                brake.Play();
-            }  
         }
 
         void FixedUpdate()
         {
-            float h = Input.GetAxis("Horizontal");
-            //float v = Input.GetAxis("Vertical");
-
-            float turn = h * rotateRange * Time.deltaTime;
-            Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-            rigitbody.MoveRotation(rigitbody.rotation * turnRotation);
-
-            Vector3 movement = transform.forward  * speed * speedRange * Time.deltaTime;
-            rigitbody.MovePosition(rigitbody.position + movement);
-
-            float angle_c = cameraAngle.eulerAngles.z;
-
-            if(0 < h)
+            if(isActive)
             {
-                if(360 - (cameraRange + cameraRate) < angle_c || angle_c < cameraRange)
+                float h = Input.GetAxis("Horizontal");
+                //float v = Input.GetAxis("Vertical");
+
+                float turn = h * rotateRange * Time.deltaTime;
+                Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+                rigitbody.MoveRotation(rigitbody.rotation * turnRotation);
+
+                Vector3 movement = transform.forward  * speed * speedRange * Time.deltaTime;
+                rigitbody.MovePosition(rigitbody.position + movement);
+
+                float angle_c = cameraAngle.eulerAngles.z;
+
+                if(0 < h)
                 {
-                    cameraAngle.Rotate(new Vector3(0,0,1), cameraRate);
+                    if(360 - (cameraRange + cameraRate) < angle_c || angle_c < cameraRange)
+                    {
+                        cameraAngle.Rotate(new Vector3(0,0,1), cameraRate);
+                    }
                 }
-            }
-            else if(h < 0)
-            { 
-                if(360 - cameraRange < angle_c || angle_c < cameraRange + cameraRate)
+                else if(h < 0)
+                { 
+                    if(360 - cameraRange < angle_c || angle_c < cameraRange + cameraRate)
+                    {
+                        cameraAngle.Rotate(new Vector3(0,0,1), -cameraRate);
+                    }
+                }
+                else
                 {
-                    cameraAngle.Rotate(new Vector3(0,0,1), -cameraRate);
+                //iTween.RotateTo(cameraAngle.gameObject, iTween.Hash("z", 0,"time", 2.0f));
                 }
-            }
-            else
-            {
-               //iTween.RotateTo(cameraAngle.gameObject, iTween.Hash("z", 0,"time", 2.0f));
             }
         }
     }

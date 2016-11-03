@@ -22,6 +22,7 @@ namespace WCE_16
 		private bool isModeX = false;
 		private float shotRate = 0.25f;
         private float nextShot = 0.0f;
+		private PlayerManager playerManager;
 
 		public float GetItemState()
 		{
@@ -51,6 +52,7 @@ namespace WCE_16
 
 		void Start () 
 		{
+			playerManager = GetComponent<PlayerManager>();
 			shotPos = transform.FindChild("ShotPos").transform;
 			circlePos = transform.FindChild("CirclePos").transform;
 			spark = transform.FindChild("Spark").GetComponent<ParticleSystem>();
@@ -59,49 +61,52 @@ namespace WCE_16
 
 		void Update()
         {
-            if(Input.GetButtonDown("UseItemB"))
+			if(playerManager.GetActive())
             {
-                if(!isModeY)
+				if(Input.GetButtonDown("UseItemB"))
 				{
-					UseItemB();
+					if(!isModeY)
+					{
+						UseItemB();
+					}
 				}
-            }
-			
-			if(Input.GetButtonDown("UseItemA"))
-			{
-				UseItemA();
-			}
-
-			if(Input.GetButtonDown("UseItemX"))
-			{
-				if(!isModeX)
+				
+				if(Input.GetButtonDown("UseItemA"))
 				{
-					isModeX = true;
-					UseItemX();
+					UseItemA();
 				}
-			}
 
-			if(Input.GetButtonDown("UseItemY"))
-			{
-				if(!isModeY)
+				if(Input.GetButtonDown("UseItemX"))
 				{
-					isModeY = true;
-
-					if(!spark.IsAlive())
-                	{
-                    	spark.Play();
-               		}
+					if(!isModeX)
+					{
+						isModeX = true;
+						UseItemX();
+					}
 				}
-			}
 
-			if(isModeY)
-			{
-				if(nextShot < Time.time)
-                {
-                    nextShot = Time.time + shotRate;
+				if(Input.GetButtonDown("UseItemY"))
+				{
+					if(!isModeY)
+					{
+						isModeY = true;
 
-                    UseItemB();
-                }
+						if(!spark.IsAlive())
+						{
+							spark.Play();
+						}
+					}
+				}
+
+				if(isModeY)
+				{
+					if(nextShot < Time.time)
+					{
+						nextShot = Time.time + shotRate;
+
+						UseItemB();
+					}
+				}
 			}
 		}
         
